@@ -11,18 +11,8 @@ body {
 }
 
 .logo-box {
-    position: absolute;
-    margin-top: 80px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#logo-box__trel_1 {
-    margin-bottom: 2px;
-}
-
-#logo-box__trel_2 {
-    margin-bottom: 3px;
+    margin: 80px auto 54px;
+    width: fit-content;
 }
 
 .sign-box {
@@ -38,36 +28,84 @@ body {
     color: rgba(255, 255, 255, 0.4);
 }
 
-.search-box {
-    height: 100%;
-    max-width: 100vw;
-    margin: auto;
-    -webkit-box-flex: 1;
-    flex-grow: 1;
-    overflow: auto;
-}
-
 .search-box__string {
-    position: absolute;
-    height: 75px;
-    width: 628px;
-    border-bottom: 2px solid rgba(255, 255, 255, 1);
-    top: 183px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
 }
 
-.search-box__string__input {
+.search-box__string-container {
+    display: flex;
+    border-bottom: 2px solid rgba(255, 255, 255, 1);
+    height: 74px;
+    width: 628px;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-box__string-container__input {
     padding-left: 14px;
     color: rgba(255, 255, 255, 0.4);
     font-size: 24px;
-    width: 446px;
+    width: 460px;
     background-color: inherit;
     border: none;
-    margin-bottom: 18px;
+    margin-top: 2px;
 }
 
-.search-box__string__img {
-    margin-top: 18px;
+.search-box__string-container__input:focus, .search-box__string-container__input:focus-visible {
+    outline:none;
+}
+
+.search-box__string-container__img {
+    width: 28px;
+    height: 28px;
+}
+
+.search-box__string__history {
+    margin-top: 24px;
+    display: none;
+}
+
+.search-box__string__history__button {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    padding: 6px 16px;
+    color: rgba(0, 0, 0, 0.8);
+    border: none;
+    margin: 0 8px 8px 0;
+    font-size: 16px;
+}
+
+.search-box__string__history__button:hover {
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+.search_active .search-box__string {
+    margin: 0 80px;
+}
+
+.search_active .search-box__string-container {
+    border-bottom: 2px solid rgba(253, 206, 37, 1);
+    width: calc(100vw - 160px);
+    justify-content: flex-start;
+}
+
+.search_active .search-box__string__history {
+    display: block;
+    max-width: 1280px;
+}
+
+.search-box__empty {
+    display: none;
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    font-weight: 900;
+}
+
+.search_not_found .search-box__empty {
+    display: block;
+    margin: 100px 80px 0;
 }

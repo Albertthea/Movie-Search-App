@@ -231,3 +231,14 @@ body {
     height: 26.49px;
     color: magenta;
 }
+
+.one {
+    width: 30px;
+    height: 30px;
+    background: url("img/Vector.png");
+}
+
+.one:hover {
+    background: url("img/Vector_hv.png");
+    cursor: pointer;
+}

@@ -76,6 +76,7 @@ main {
 .search__string__history {
     margin-top: 24px;
     display: none;
+    max-width: 1280px;
 }
 
 .search__string__history__button {
@@ -102,7 +103,6 @@ main {
 
 .search_active .search__string__history {
     display: block;
-    max-width: 1280px;
 }
 
 .search_live .search__string-container {
@@ -113,7 +113,6 @@ main {
 
 .search_live .search__string__history {
     display: block;
-    max-width: 1280px;
 }
 
 .search__empty {
@@ -121,6 +120,7 @@ main {
     color: rgb(255, 255, 255);
     font-size: 36px;
     font-weight: 900;
+    margin: 100px 80px 0;
 }
 
 .search__results__text {
@@ -128,16 +128,15 @@ main {
     color: rgb(255, 255, 255);
     font-size: 36px;
     font-weight: 900;
+    margin: 100px 80px 0;
 }
 
 .search_live .search__results__text {
     display: block;
-    margin: 100px 80px 0;
 }
 
 .search_not_found .search__empty {
     display: block;
-    margin: 100px 80px 0;
 }
 
 .search_not_found .search__string-container {
@@ -148,7 +147,6 @@ main {
 
 .search_not_found .search__string__history {
     display: block;
-    max-width: 1280px;
 }
 
 .search__results {
@@ -258,44 +256,70 @@ main {
 }
 
 .search__results__item__inf {
-    position: relative;
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 26.43%, rgba(0, 0, 0, 0.8) 72.41%);
+    display: none; 
+    margin-top: 280px;
+    height: 174px;
+    grid-template-rows: repeat(3,1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .search__results__item:hover .search__results__item__inf {
-    display: flex;
+    display: grid;
     cursor: pointer;
+}
+
+.search__results__item:hover {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 26.43%, rgba(0, 0, 0, 0.8) 72.41%);
 }
 
 .search__results__item_textonly-genre_1 {
     display: inline-block;
     font-size: 16px;
-    margin: 0 46px 20px 20px;
+    padding-left: 20px;
     width: 168px;
     padding-top: 16px;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    z-index: 3;
 }
 
 .search__results__item_textonly-year_1 {
     display: inline-block;
+    /* align-content: center; */
     font-size: 16px;
-    margin: 0 20px 20px 0;
+    padding-right: 20px;
+    text-align: end;
+    /* margin: 0 20px 20px 0; */
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    align-self: center;
+    z-index: 3;
 }
 
 .search__results__item_textonly-note {
-    margin: 280px 220px 0 20px;
+    /* margin: 280px 220px 0 20px; */ 
     color: rgba(255, 255, 255, 1);
     font-size: 24px;
+    align-self: center;
+    padding-left: 20px;
+    z-index: 3;
 }
 
 .search__results__item_textonly-name {
-    margin: 4px 24px 0 20px;
     font-weight: 700;
     font-size: 24px;
     color: rgba(255, 255, 255, 1);
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    align-self: center;
+    padding-left: 20px;
+    z-index: 3;
 }
 
 .search__string-container__search {

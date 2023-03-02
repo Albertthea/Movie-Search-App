@@ -1,16 +1,16 @@
-$color-text: rgba(255, 255, 255, 0.4);
+$color-text: rgba(255, 255, 255, .4);
 $color-background: #1C1C1C;
-$color-white: rgba(255, 255, 255, 1);
+$color-white: #FFF;
 $color-yellow: rgba(253, 206, 37, 1);
 $color-black: #000;
-$color-mid-grey: rgba(255, 255, 255, 0.24);
+$color-mid-grey: rgba(255, 255, 255, .24);
 
 *,
 *::after,
 *::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
 }
 
 body {
@@ -50,10 +50,10 @@ main {
     }
 
     &__button {
-        background-color: rgba($color-white, 0.8);
+        background-color: rgba($color-white, .8);
         border-radius: 4px;
         padding: 6px 16px;
-        color: rgba($color-black, 0.8);
+        color: rgba($color-black, .8);
         border: none;
         margin: 0 8px 8px 0;
         font-size: 16px;
@@ -216,7 +216,7 @@ main {
         grid-template-columns: repeat(2, 1fr);
         padding: 280px 20px 0;
         position: relative;
-        background: linear-gradient(180deg, rgba($color-black, 0) 26.43%, rgba($color-black, 0.8) 72.41%);
+        background: linear-gradient(180deg, rgba($color-black, 0) 26.43%, rgba($color-black, .8) 72.41%);
     }
 
     &__genre {
@@ -262,7 +262,7 @@ main {
 
 .nodownloaded-result-item {
     &__name {
-        background-color: rgba(255, 255, 255, 0.08);
+        background-color: rgba($color-white, .08);
         border-radius: 2px;
         width: 246px;
         height: 24px;
@@ -270,7 +270,7 @@ main {
     }
     
     &__genre {
-        background-color: rgba(255, 255, 255, 0.08);
+        background-color: rgba($color-white, .08);
         border-radius: 2px;
         width: 156px;
         height: 24px;

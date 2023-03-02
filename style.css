@@ -47,14 +47,14 @@ main {
 
 .search-string {
   display: flex;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid #FFF;
   height: 74px;
   width: 628px;
   align-items: center;
   justify-content: center; }
   .search-string__input {
     padding-left: 14px;
-    color: white;
+    color: #FFF;
     font-size: 24px;
     width: 460px;
     background-color: inherit;
@@ -108,7 +108,7 @@ main {
 
 .search-empty {
   display: none;
-  color: white;
+  color: #FFF;
   font-size: 36px;
   font-weight: 900;
   margin: 100px 80px 0; }
@@ -136,7 +136,7 @@ main {
   margin: 36px auto 0; }
   .search-results__text {
     display: none;
-    color: white;
+    color: #FFF;
     font-size: 36px;
     font-weight: 900;
     margin: 100px 80px 0; }
@@ -172,13 +172,13 @@ main {
     grid-row-start: 3;
     align-self: center; }
   .result-item__note {
-    color: white;
+    color: #FFF;
     font-size: 24px;
     align-self: center; }
   .result-item__name {
     font-weight: 700;
     font-size: 24px;
-    color: white;
+    color: #FFF;
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 2;
@@ -231,7 +231,7 @@ main {
   background-color: rgba(28, 28, 28, 0.8);
   padding: 0 88px;
   width: 100%;
-  border-color: white;
+  border-color: #FFF;
   justify-content: space-between; }
 
 .scroll .search-string__svg {

@@ -19,12 +19,13 @@ body {
 }
 
 main {
-    min-height: calc(100vh - 144px);
+    min-height: calc(100vh - 277px);
 }
 
 .logo-box {
     margin: 80px auto 54px;
     width: fit-content;
+    overflow: hidden;
 }
 
 .sign-box {
@@ -215,7 +216,8 @@ main {
         grid-template-rows: repeat(3,1fr);
         grid-template-columns: repeat(2, 1fr);
         padding: 280px 20px 0;
-        position: relative;
+        position: relative; 
+        border-radius: 12px;
         background: linear-gradient(180deg, rgba($color-black, 0) 26.43%, rgba($color-black, .8) 72.41%);
     }
 

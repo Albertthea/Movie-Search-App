@@ -10,11 +10,12 @@ body {
   font-family: 'Roboto'; }
 
 main {
-  min-height: calc(100vh - 144px); }
+  min-height: calc(100vh - 277px); }
 
 .logo-box {
   margin: 80px auto 54px;
-  width: fit-content; }
+  width: fit-content;
+  overflow: hidden; }
 
 .sign-box {
   margin: 80px auto 16px;
@@ -156,6 +157,7 @@ main {
     grid-template-columns: repeat(2, 1fr);
     padding: 280px 20px 0;
     position: relative;
+    border-radius: 12px;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 26.43%, rgba(0, 0, 0, 0.8) 72.41%); }
   .result-item__genre {
     display: inline-block;

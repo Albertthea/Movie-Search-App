@@ -1,39 +1,17 @@
 let searchRes = document.querySelector('.search-results');
 
-function renderMovie(movie) {
-	const resItem = document.createElement('div');
-	resItem.classList.add('result-item');
-
-	const posterMovie = document.createElement('img');
-	posterMovie.classList.add('result-item__poster');
-	posterMovie.src = movie.Poster;
-	resItem.appendChild(posterMovie);
-
-	const resInf = document.createElement('div');
-	resInf.classList.add('result-item__inf');
-	resItem.appendChild(resInf);
-
-	const noteMovie = document.createElement('div');
-	noteMovie.classList.add('result-item__inf__note');
-	noteMovie.textContent = '3.8';
-	resInf.appendChild(noteMovie);
-
-	const nameMovie = document.createElement('div');
-	nameMovie.classList.add('result-item__inf__name');
-	nameMovie.textContent = movie.Title;
-	resInf.appendChild(nameMovie);
-
-	const genreMovie = document.createElement('div');
-	genreMovie.classList.add('result-item__inf__genre');
-	genreMovie.textContent = movie.Type;
-	resInf.appendChild(genreMovie);
-
-	const yearMovie = document.createElement('div');
-	yearMovie.classList.add('result-item__inf__year');
-	yearMovie.textContent = movie.Year;
-	resInf.appendChild(yearMovie);
-
-    return resItem;
+function renderMovies(movie) {
+    return `
+      <div class="result-item">
+        <img src="${movie.Poster}" class="result-item__poster">
+        <div class="result-item__inf">
+          <div class="result-item__inf__note">4.1</div>
+          <div class="result-item__inf__name">${movie.Title}</div>
+          <div class="result-item__inf__genre">${movie.Type}</div>
+          <div class="result-item__inf__year">${movie.Year}</div>
+        </div>
+      </div>
+    `;
 }
 
 const main = async () => {
@@ -41,11 +19,10 @@ const main = async () => {
     const data = await response.json();
     console.log(data.Search);
 
-    data.Search.forEach(element => {
-        const m = renderMovie(element);
-        searchRes.appendChild(m);
+    const movies = data.Search.forEach(element => {
+        searchRes.innerHTML += renderMovies(element);
     });
+
 };
     
-  
 main();

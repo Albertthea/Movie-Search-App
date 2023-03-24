@@ -4,7 +4,7 @@
   "description": "HW 2 Fintech",
   "main": "index.js",
   "scripts": {
-    "compile:sass" : "node-sass sass/main.scss style.css"
+    "compile:sass": "node-sass sass/main.scss style.css"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "homepage": "https://github.com/TFSchool/html-css-practice-Albertthea#readme",
   "devDependencies": {
     "node-sass": "^8.0.0"
+  },
+  "dependencies": {
+    "prettier": "^2.8.7"
   }
 }

@@ -208,6 +208,8 @@ main {
 
     &__poster {
         position: absolute;
+        width: 302px;
+        height: 454px;
     }
 
     &__inf {
@@ -219,43 +221,44 @@ main {
         position: relative; 
         border-radius: 12px;
         background: linear-gradient(180deg, rgba($color-black, 0) 26.43%, rgba($color-black, .8) 72.41%);
+
+        &__name {
+            font-weight: 700;
+            font-size: 24px;
+            color: $color-white;
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row-start: 2;
+            grid-row-end: 3;
+            align-self: center;
+        }
+
+        &__note {
+            color: $color-white;
+            font-size: 24px;
+            align-self: center;
+        }
+
+        &__genre {
+            display: inline-block;
+            font-size: 16px;
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 3;
+            align-self: center;
+        }
+        
+        &__year {
+            display: inline-block;
+            font-size: 16px;
+            text-align: end;
+            grid-column-start: 2;
+            grid-row-start: 3;
+            align-self: center;
+        }
     }
 
-    &__genre {
-        display: inline-block;
-        font-size: 16px;
-        grid-column-start: 1;
-        grid-column-end: 2;
-        grid-row-start: 3;
-        align-self: center;
-    }
     
-    &__year {
-        display: inline-block;
-        font-size: 16px;
-        text-align: end;
-        grid-column-start: 2;
-        grid-row-start: 3;
-        align-self: center;
-    }
-    
-    &__note {
-        color: $color-white;
-        font-size: 24px;
-        align-self: center;
-    }
-    
-    &__name {
-        font-weight: 700;
-        font-size: 24px;
-        color: $color-white;
-        grid-column-start: 1;
-        grid-column-end: 3;
-        grid-row-start: 2;
-        grid-row-end: 3;
-        align-self: center;
-    }
-
     &:hover .result-item__inf {
         display: grid;
         cursor: pointer;

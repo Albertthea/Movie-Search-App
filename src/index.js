@@ -1,17 +1,23 @@
 let searchRes = document.querySelector('.search-results');
+let ResItemTemplate = document.querySelector('.template-item');
 
-function renderMovies(movie) {
-    return `
-      <div class="result-item">
-        <img src="${movie.Poster}" class="result-item__poster">
-        <div class="result-item__inf">
-          <div class="result-item__inf__note">4.1</div>
-          <div class="result-item__inf__name">${movie.Title}</div>
-          <div class="result-item__inf__genre">${movie.Type}</div>
-          <div class="result-item__inf__year">${movie.Year}</div>
-        </div>
-      </div>
-    `;
+function renderMovies(movieData) {
+    let cloneTemplate = ResItemTemplate.content.cloneNode(true);
+
+    const poster = cloneTemplate.querySelector('.result-item__poster');
+    const info = cloneTemplate.querySelector('.result-item__inf');
+    const title = cloneTemplate.querySelector('.result-item__inf__name');
+    const rating = cloneTemplate.querySelector('.result-item__inf__note');
+    const genre = cloneTemplate.querySelector('.result-item__inf__genre');
+    const year = cloneTemplate.querySelector('.result-item__inf__year');
+
+    title.innerText = movieData.Title;
+    poster.src = movieData.Poster;
+    genre.innerText = movieData.Type;
+    year.innerText = movieData.Year;
+    rating.innerText = '4.3';
+
+    return cloneTemplate;
 }
 
 const main = async () => {
@@ -20,7 +26,8 @@ const main = async () => {
     console.log(data.Search);
 
     const movies = data.Search.forEach(element => {
-        searchRes.innerHTML += renderMovies(element);
+        let m = renderMovies(element);
+        searchRes.appendChild(m);
     });
 
 };

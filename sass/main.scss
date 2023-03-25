@@ -210,6 +210,7 @@ main {
         position: absolute;
         width: 302px;
         height: 454px;
+        border-radius: 0;
     }
 
     &__inf {
@@ -258,6 +259,9 @@ main {
         }
     }
 
+    &:hover .result-item__poster {
+        border-radius: 12px;
+    }
     
     &:hover .result-item__inf {
         display: grid;

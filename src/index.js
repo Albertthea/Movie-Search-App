@@ -15,7 +15,7 @@ function renderMovies(movieData) {
     poster.src = movieData.Poster;
     genre.innerText = movieData.Type;
     year.innerText = movieData.Year;
-    rating.innerText = '4.3';
+    rating.innerText = '';
 
     return cloneTemplate;
 }

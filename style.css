@@ -151,7 +151,8 @@ main {
   .result-item__poster {
     position: absolute;
     width: 302px;
-    height: 454px; }
+    height: 454px;
+    border-radius: 0; }
   .result-item__inf {
     display: none;
     height: 100%;
@@ -188,6 +189,8 @@ main {
       grid-column-start: 2;
       grid-row-start: 3;
       align-self: center; }
+  .result-item:hover .result-item__poster {
+    border-radius: 12px; }
   .result-item:hover .result-item__inf {
     display: grid;
     cursor: pointer; }

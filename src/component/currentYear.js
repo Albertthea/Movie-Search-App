@@ -4,8 +4,12 @@ class CurrentYear extends HTMLElement {
   
       const shadow = this.attachShadow({ mode: 'open' });
   
-      shadow.textContent = `${new Date().getFullYear()}`;
+      this.render();
     }
+
+    render() {
+        const year = new Date().getFullYear();
+        this.shadowRoot.innerHTML = year;
+    } 
 }
-  
 customElements.define('current-year', CurrentYear);

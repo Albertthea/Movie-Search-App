@@ -13,7 +13,7 @@
 			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap"
 			rel="stylesheet"
 		/>
-		<script src="src/index.js" defer></script>
+		<script src="src/index.js" defer type="module"></script>
 		<script src="src/component/currentYear.js"></script>
 	</head>
 	<body>
@@ -65,21 +65,7 @@
 			</div>
 			<div class="search-empty">Мы не поняли о чем речь ¯\_(ツ)_/¯</div>
 			<div class="search-results__text">Нашли 82 фильма</div>
-			<div class="search-results">
-				<template class="template-item">
-					<div class="result-item">
-						<a>
-							<img class="result-item__poster" />
-							<div class="result-item__inf">
-								<div class="result-item__inf__note"></div>
-								<div class="result-item__inf__name"></div>
-								<div class="result-item__inf__genre"></div>
-								<div class="result-item__inf__year"></div>
-							</div>
-						</a>
-					</div>
-				</template>
-			</div>
+			<div class="search-results"></div>
 		</main>
 		<footer>
 			<div class="sign-box">

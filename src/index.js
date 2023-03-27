@@ -1,35 +1,37 @@
-let searchRes = document.querySelector('.search-results');
-let ResItemTemplate = document.querySelector('.template-item');
+import { mapMovie } from './helpers/mapMovie.js';
+import './component/movieCard.js';
+
+
+let ResItemTemplate = document.querySelector('.result-item');
 
 function renderMovies(movieData) {
-    let cloneTemplate = ResItemTemplate.content.cloneNode(true);
+    const movie = document.createElement('movie-card');
 
-    const poster = cloneTemplate.querySelector('.result-item__poster');
-    const info = cloneTemplate.querySelector('.result-item__inf');
-    const title = cloneTemplate.querySelector('.result-item__inf__name');
-    const rating = cloneTemplate.querySelector('.result-item__inf__note');
-    const genre = cloneTemplate.querySelector('.result-item__inf__genre');
-    const year = cloneTemplate.querySelector('.result-item__inf__year');
-
-    title.innerText = movieData.Title;
-    poster.src = movieData.Poster;
-    genre.innerText = movieData.Type;
-    year.innerText = movieData.Year;
-    rating.innerText = '';
-
-    return cloneTemplate;
+    movie.poster = movieData.poster;
+    movie.title = movieData.title;
+    movie.year = movieData.year;
+    movie.link = movieData.link;
+    movie.note = movieData.note;
+    movie.genre = movieData.genre;
+  
+    return movie;
 }
+
+let searchRes = document.querySelector('.search-results');
 
 const main = async () => {
     const response = await fetch('src/data.json');
     const data = await response.json();
-    console.log(data.Search);
-
-    const movies = data.Search.forEach(element => {
-        let m = renderMovies(element);
-        searchRes.appendChild(m);
+    const movies = data.Search.map((movie) => mapMovie(movie));
+  
+    const fragment = document.createDocumentFragment();
+  
+    movies.forEach((movie) => {
+        const m = renderMovies(movie);
+        fragment.appendChild(m);
     });
-
+  
+    searchRes.appendChild(fragment);
 };
-    
+  
 main();

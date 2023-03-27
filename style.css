@@ -142,59 +142,6 @@ main {
     font-weight: 900;
     margin: 100px 80px 0; }
 
-.result-item {
-  background-color: rgba(255, 255, 255, 0.24);
-  height: 454px;
-  width: 302px;
-  border-radius: 12px;
-  color: rgba(255, 255, 255, 0.24); }
-  .result-item__poster {
-    position: absolute;
-    width: 302px;
-    height: 454px;
-    border-radius: 0; }
-  .result-item__inf {
-    display: none;
-    height: 100%;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: repeat(2, 1fr);
-    padding: 280px 20px 0;
-    position: relative;
-    border-radius: 12px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 26.43%, rgba(0, 0, 0, 0.8) 72.41%); }
-    .result-item__inf__name {
-      font-weight: 700;
-      font-size: 24px;
-      color: #FFF;
-      grid-column-start: 1;
-      grid-column-end: 3;
-      grid-row-start: 2;
-      grid-row-end: 3;
-      align-self: center; }
-    .result-item__inf__note {
-      color: #FFF;
-      font-size: 24px;
-      align-self: center; }
-    .result-item__inf__genre {
-      display: inline-block;
-      font-size: 16px;
-      grid-column-start: 1;
-      grid-column-end: 2;
-      grid-row-start: 3;
-      align-self: center; }
-    .result-item__inf__year {
-      display: inline-block;
-      font-size: 16px;
-      text-align: end;
-      grid-column-start: 2;
-      grid-row-start: 3;
-      align-self: center; }
-  .result-item:hover .result-item__poster {
-    border-radius: 12px; }
-  .result-item:hover .result-item__inf {
-    display: grid;
-    cursor: pointer; }
-
 .nodownloaded-result-item__name {
   background-color: rgba(255, 255, 255, 0.08);
   border-radius: 2px;

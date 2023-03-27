@@ -15,13 +15,15 @@ movieTemplate.innerHTML = `
     height: 454px;
     width: 302px;
     border-radius: 12px;
-    color: rgba(255, 255, 255, 0.24); 
+    color: rgba(255, 255, 255, 0.24);
+    text-decoration: none;
 }
 
-.movie-link {
+.result-item__link {
     display: block;
     height: 100%;
     width: 100%;
+    text-decoration: none;
 }
   
 .result-item__poster {
@@ -36,10 +38,10 @@ movieTemplate.innerHTML = `
     height: 100%;
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(2, 1fr);
-    padding: 280px 20px 0;
+    padding: 275px 20px 5px;
     position: relative;
     border-radius: 12px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 26.43%, rgba(0, 0, 0, 0.8) 72.41%); 
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 26.43%, rgba(0, 0, 0, 0.8) 72.41%);
 }
 
 .result-item__title {
@@ -50,7 +52,8 @@ movieTemplate.innerHTML = `
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    align-self: center; 
+    align-self: center;
+    margin: 0;
 }
 
 .result-item__note {

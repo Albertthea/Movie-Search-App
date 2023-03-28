@@ -14,7 +14,7 @@
 			rel="stylesheet"
 		/>
 		<script src="src/index.js" defer type="module"></script>
-		<script src="src/component/currentYear.js"></script>
+		<script src="src/component/currentYear.js" defer></script>
 	</head>
 	<body>
 		<header>
@@ -22,18 +22,17 @@
 				<img src="img/logo—tp.svg" alt="Logo" />
 			</div>
 		</header>
-		<main class="scroll">
-			<div class="search-container">
+		<main class="search">
+			<form class="search-container">
 				<div class="search-string">
 					<div class="search-string__content">
 						<img src="img/Union.png" class="search-string__img" />
 						<input
-							type="text"
+							type="search"
 							placeholder="Поиск фильмов по жанрам и актерам"
 							class="search-string__input"
 						/>
 					</div>
-					<div class="search-string__svg"></div>
 				</div>
 				<div class="search-container__history">
 					<button class="search-container__button">
@@ -62,7 +61,7 @@
 						Дикий дикий дикий Запад
 					</button>
 				</div>
-			</div>
+			</form>
 			<div class="search-empty">Мы не поняли о чем речь ¯\_(ツ)_/¯</div>
 			<div class="search-results__text">Нашли 82 фильма</div>
 			<div class="search-results"></div>

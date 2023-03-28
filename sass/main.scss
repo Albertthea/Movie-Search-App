@@ -86,6 +86,16 @@ main {
         font-family: 'Roboto';
         font-weight: 300;
 
+        &::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+            content: url('/img/Vector.png');
+            cursor: pointer;
+        }
+          
+        &::-webkit-search-cancel-button:hover {
+            content: url('/img/Vector_hv.png');
+        }
+
         &::placeholder {
             color: $color-text;
             font-family: 'Roboto';
@@ -123,6 +133,10 @@ main {
         border-bottom: 2px solid $color-yellow;
         width: calc(100vw - 160px);
         justify-content: space-between;
+
+        &__input {
+            width: 1290px;
+        }
     }
     
     & .search-container__history {
@@ -135,6 +149,10 @@ main {
         border-bottom: 2px solid $color-yellow;
         width: calc(100vw - 160px);
         justify-content: space-between;
+
+        &__input {
+            width: 1290px;
+        }
     }
     
     & .search-container__history {
@@ -171,6 +189,10 @@ main {
         border-bottom: 2px solid $color-yellow;
         width: calc(100vw - 160px);
         justify-content: space-between;
+
+        &__input {
+            width: 1290px;
+        }
     }
     
     & .search-container__history {
@@ -325,6 +347,10 @@ main {
         width: 100%;
         border-color: $color-white;
         justify-content: space-between;
+
+        &__input {
+            width: 1290px;
+        }
     }
     
     & .search-string__svg {

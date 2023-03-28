@@ -5,6 +5,7 @@ import { setClassToMain } from './helpers/setClassToMain.js';
 const searchContainer = document.querySelector('.search-container');
 const input = document.querySelector('.search-string__input');
 const resultItems = document.querySelector('.search-results');
+let infoText = document.querySelector('.search-results__text');
 
 input.addEventListener('click', () => setClassToMain('search_active'));
 
@@ -46,6 +47,7 @@ const search = async (searchTerm) => {
 	if (!data.Search || data.Search.length === 0) {
 		setClassToMain('search_not_found');
 	} else {
+        infoText.innerText = `Нашли ${data.Search.length} фильмов`;
         const movies = data.Search.map((movie) => mapMovie(movie));
 		const fragment = document.createDocumentFragment();
 

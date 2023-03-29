@@ -1,70 +1,18 @@
-import { mapMovie } from './helpers/mapMovie.js';
 import './component/movieCard.js';
-import { setClassToMain } from './helpers/setClassToMain.js';
+import { createModel } from './app/createModel.js';
+import { createViewModel } from './app/createViewModel.js';
+import { createView } from './app/createView.js';
 
-const searchContainer = document.querySelector('.search-container');
-const input = document.querySelector('.search-string__input');
-const resultItems = document.querySelector('.search-results');
-let infoText = document.querySelector('.search-results__text');
+const model = createModel();
+const view = createView();
+const viewModel = createViewModel(model);
 
-input.addEventListener('click', () => setClassToMain('search_active'));
+// ViewModel -> View
+viewModel.bindCount(view.renderCount);
+viewModel.bindError(view.renderError);
+viewModel.bindResults(view.renderList);
 
-window.addEventListener('scroll', () => {
-	const height = window.pageYOffset;
+// View -> ViewModel
+view.onSearchSubmit(viewModel.handleSearchSubmit);
 
-	if (height > 239) {
-		setClassToMain('scroll');
-	} else {
-		setClassToMain('search_live');
-	}
-});
-
-function renderMovies(movieData) {
-	const movie = document.createElement('movie-card');
-
-	movie.poster = movieData.poster;
-	movie.title = movieData.title;
-	movie.year = movieData.year;
-	movie.link = movieData.link;
-	movie.note = movieData.note;
-	movie.genre = movieData.genre;
-
-	return movie;
-}
-
-const search = async (searchTerm) => {
-	while (resultItems.firstChild) {
-		resultItems.removeChild(resultItems.firstChild);
-	}
-
-	setClassToMain('search_live');
-
-	const response = await fetch(
-		`http://www.omdbapi.com/?apikey=40952606&type=movie&s=${searchTerm}`
-	);
-	const data = await response.json();
-
-	if (!data.Search || data.Search.length === 0) {
-		setClassToMain('search_not_found');
-	} else {
-        infoText.innerText = `Нашли ${data.Search.length} фильмов`;
-        const movies = data.Search.map((movie) => mapMovie(movie));
-		const fragment = document.createDocumentFragment();
-
-		movies.forEach((movie) => {
-			const m = renderMovies(movie);
-			fragment.appendChild(m);
-		});
-
-		resultItems.appendChild(fragment);
-	}
-};
-
-const subscribeToSubmit = () => {
-	searchContainer.addEventListener('submit', (event) => {
-		event.preventDefault();
-		search(input.value);
-	});
-};
-
-subscribeToSubmit();
+view.setStatusListeners();

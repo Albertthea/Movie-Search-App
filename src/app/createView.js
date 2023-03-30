@@ -102,9 +102,7 @@ export const createView = () => {
 		  const searchTerm = searchInput.value;
 		  _listener(searchTerm);
 		  searchInput.value = '';
-		  // Save the search term to the array
 		  searchTerms.unshift(searchTerm);
-		  // Render the search list
 		  renderSearchList();
 		};
 	

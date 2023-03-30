@@ -28,6 +28,18 @@ export const createViewModel = (model) => {
     }
 
     state = nextState;
+    localStorage.setItem('state', JSON.stringify(state)); 
+  };
+
+  const savedState = localStorage.getItem('state');
+  if (savedState) {
+    state = JSON.parse(savedState);
+  }
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    const searchTerm = document.querySelector('.search-string__input').value;
+    model.search(searchTerm);
   };
 
   return {
@@ -39,6 +51,6 @@ export const createViewModel = (model) => {
     init: () => {
       update(model.getState());
       model.subscribe(update);
-    },
+    },   
   };
-};
+}

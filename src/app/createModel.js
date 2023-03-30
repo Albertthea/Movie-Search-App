@@ -8,7 +8,13 @@ export const createModel = () =>
       count: 0,
       results: [],
       error: false,
-      searches: [],
+      searches: [
+        'Star Wars',
+         'Kung Fury',
+         'Back to the Future',
+         'Matrix',
+         'Terminator',
+      ],
     },
     (store) => ({
       search: async (currentState, searchTerm) => {

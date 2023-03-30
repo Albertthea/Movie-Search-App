@@ -10,10 +10,13 @@ export const createView = () => {
 	const resultsContainer = document.querySelector('.search-results');
 	const infoText = document.querySelector('.search-results__text');
 
+	const searchContainer = document.querySelector('.search-container__history');
+
 	// Form
 	const searchForm = document.querySelector('.search-container');
 	const searchInput = document.querySelector('.search-string__input');
 	const main = document.querySelector('main');
+	const searchTerms = [];
 
 	// Renderers
 	const renderList = (results) => {
@@ -38,6 +41,36 @@ export const createView = () => {
 		resultsContainer.appendChild(list);
 	};
 
+	// const renderSearchList = (terms) => {
+	// 	const list = document.createDocumentFragment();
+	// 	terms.forEach((movie) => {
+	// 	  const tag = document.createElement('button');
+	// 	  tag.classList.add('search-container__button');
+	// 	  tag.href = `/?search=${movie}`;
+	// 	  tag.textContent = movie;
+   
+	// 	  list.appendChild(tag);
+	// 	});
+
+	// 	clearNode(searchContainer);
+	// 	searchContainer.appendChild(list);
+	// };
+	
+	const renderSearchList = () => {
+		const list = document.createDocumentFragment();
+		searchTerms.slice(0, 10).forEach((movie) => {
+		  const tag = document.createElement('button');
+		  tag.classList.add('search-container__button');
+		  tag.href = `/?search=${movie}`;
+		  tag.textContent = movie;
+	
+		  list.appendChild(tag);
+		});
+	
+		clearNode(searchContainer);
+		searchContainer.appendChild(list);
+	};
+
 	const renderCount = (count) => {
 		infoText.textContent = `Нашли ${count} ${dMovies(count)}`;
 	};
@@ -47,17 +80,39 @@ export const createView = () => {
 	};
 
 	// Events
+	//это без сохранения
+
+	// const onSearchSubmit = (_listener) => {
+	// 	const listener = (event) => {
+	// 	  event.preventDefault();
+	// 	  const searchTerm = searchInput.value;
+	// 	  _listener(searchTerm);
+	// 	  searchInput.value = '';
+	// 	  renderSearchList([searchTerm]); // Add this line to render the search term
+	// 	};
+	  
+	// 	searchForm.addEventListener('submit', listener);
+	  
+	// 	return () => searchForm.removeEventListener('submit', listener);
+	// };
+
 	const onSearchSubmit = (_listener) => {
 		const listener = (event) => {
-			event.preventDefault();
-			_listener(searchInput.value);
-			searchInput.value = '';
+		  event.preventDefault();
+		  const searchTerm = searchInput.value;
+		  _listener(searchTerm);
+		  searchInput.value = '';
+		  // Save the search term to the array
+		  searchTerms.unshift(searchTerm);
+		  // Render the search list
+		  renderSearchList();
 		};
-
+	
 		searchForm.addEventListener('submit', listener);
-
+	
 		return () => searchForm.removeEventListener('submit', listener);
-	};
+	  };
+
 
 	const setStatusListeners = () => {
 		searchInput.addEventListener('click', () => {
@@ -81,6 +136,7 @@ export const createView = () => {
 		renderList,
 		renderCount,
 		renderError,
+		renderSearchList,
 		onSearchSubmit,
 		setStatusListeners,
 	};

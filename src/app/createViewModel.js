@@ -1,8 +1,9 @@
 export const createViewModel = (model) => {
-  let state = model.getState();
+  let state = {};
   let resultsListener = null;
   let countListener = null;
   let errorListener = null;
+  let searchesListener = null;
 
   const update = (nextState) => {
     if (nextState.error) {
@@ -22,15 +23,22 @@ export const createViewModel = (model) => {
       countListener && countListener(nextState.count);
     }
 
+    if (nextState.searches !== state.searches) {
+      searchesListener && searchesListener(nextState.searches);
+    }
+
     state = nextState;
   };
-
-  model.subscribe(update);
 
   return {
     bindError: (listener) => (errorListener = listener),
     bindCount: (listener) => (countListener = listener),
     bindResults: (listener) => (resultsListener = listener),
+    bindSearches: (listener) => (searchesListener = listener),
     handleSearchSubmit: (searchTerm) => model.search(searchTerm),
+    init: () => {
+      update(model.getState());
+      model.subscribe(update);
+    },
   };
 };

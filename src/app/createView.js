@@ -10,7 +10,9 @@ export const createView = () => {
 	const resultsContainer = document.querySelector('.search-results');
 	const infoText = document.querySelector('.search-results__text');
 
-	const searchContainer = document.querySelector('.search-container__history');
+	const searchContainer = document.querySelector(
+		'.search-container__history'
+	);
 
 	// Form
 	const searchForm = document.querySelector('.search-container');
@@ -41,32 +43,21 @@ export const createView = () => {
 		resultsContainer.appendChild(list);
 	};
 
-	// const renderSearchList = (terms) => {
-	// 	const list = document.createDocumentFragment();
-	// 	terms.forEach((movie) => {
-	// 	  const tag = document.createElement('button');
-	// 	  tag.classList.add('search-container__button');
-	// 	  tag.href = `/?search=${movie}`;
-	// 	  tag.textContent = movie;
-   
-	// 	  list.appendChild(tag);
-	// 	});
-
-	// 	clearNode(searchContainer);
-	// 	searchContainer.appendChild(list);
-	// };
-	
 	const renderSearchList = () => {
 		const list = document.createDocumentFragment();
-		searchTerms.slice(0, 10).forEach((movie) => {
-		  const tag = document.createElement('button');
-		  tag.classList.add('search-container__button');
-		  tag.href = `/?search=${movie}`;
-		  tag.textContent = movie;
-	
-		  list.appendChild(tag);
+		searchTerms.forEach((movie) => {
+			const tag = document.createElement('button');
+			tag.classList.add('search-container__button');
+			tag.href = `/?search=${movie}`;
+			tag.textContent = movie;
+
+			list.appendChild(tag);
+
+			if (searchTerms.length > 10) {
+				searchTerms.pop();
+			}
 		});
-	
+
 		clearNode(searchContainer);
 		searchContainer.appendChild(list);
 	};
@@ -80,37 +71,27 @@ export const createView = () => {
 	};
 
 	// Events
-	//это без сохранения
-
-	// const onSearchSubmit = (_listener) => {
-	// 	const listener = (event) => {
-	// 	  event.preventDefault();
-	// 	  const searchTerm = searchInput.value;
-	// 	  _listener(searchTerm);
-	// 	  searchInput.value = '';
-	// 	  renderSearchList([searchTerm]); // Add this line to render the search term
-	// 	};
-	  
-	// 	searchForm.addEventListener('submit', listener);
-	  
-	// 	return () => searchForm.removeEventListener('submit', listener);
-	// };
-
 	const onSearchSubmit = (_listener) => {
 		const listener = (event) => {
-		  event.preventDefault();
-		  const searchTerm = searchInput.value;
-		  _listener(searchTerm);
-		  searchInput.value = '';
-		  searchTerms.unshift(searchTerm);
-		  renderSearchList();
-		};
-	
-		searchForm.addEventListener('submit', listener);
-	
-		return () => searchForm.removeEventListener('submit', listener);
-	  };
+			event.preventDefault();
+			setClassToMain('search_live');
+			const searchTerm = searchInput.value;
+			_listener(searchTerm);
+			searchInput.value = '';
+			searchTerms.unshift(searchTerm);
+			renderSearchList();
 
+			clearNode(resultsContainer);
+			const spinnerTemplate = document.querySelector('#loaderTemplate');
+			const spinner = spinnerTemplate.content.cloneNode(true);
+
+			resultsContainer.appendChild(spinner);
+		};
+
+		searchForm.addEventListener('submit', listener);
+
+		return () => searchForm.removeEventListener('submit', listener);
+	};
 
 	const setStatusListeners = () => {
 		searchInput.addEventListener('click', () => {

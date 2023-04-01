@@ -108,61 +108,71 @@ movieTemplate.innerHTML = `
 const params = ['title', 'poster', 'link', 'year', 'genre', 'note'];
 
 const match = (params, el) => {
-    for (let param of params) {
-        Object.defineProperty(el, param, {
-            get() {
-                return this.getAttribute(param) 
-            },
-            set(value) {
-                this.setAttribute(param, value)
-            },
-        });
-    }
-}
+	for (let param of params) {
+		Object.defineProperty(el, param, {
+			get() {
+				return this.getAttribute(param);
+			},
+			set(value) {
+				this.setAttribute(param, value);
+			},
+		});
+	}
+};
 
 class MovieCard extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        const template = movieTemplate.content.cloneNode(true);
+	constructor() {
+		super();
+		this.attachShadow({ mode: 'open' });
+		const template = movieTemplate.content.cloneNode(true);
 
-        this.shadowRoot.appendChild(template);
-        match(params, this);
-    }
-    
-    static get observedAttributes() {
-        return params;
-    }
-    
-    attributeChangedCallback(param, oldValue, newValue) {
-        switch (param) {
-          case 'title':
-            return (this.shadowRoot.querySelector(
-              '.result-item__title'
-            ).textContent = newValue);
-    
-          case 'poster':
-            return (this.shadowRoot.querySelector('.result-item__poster').src = newValue);
-    
-          case 'link':
-            return (this.shadowRoot.querySelector('.result-item__link').href = newValue);
-    
-          case 'year':
-            return (this.shadowRoot.querySelector(
-              '.result-item__year'
-            ).textContent = newValue);
-    
-          case 'note':
-            return (this.shadowRoot.querySelector(
-              '.result-item__note'
-            ).textContent = newValue);
-    
-          case 'genre':
-            return (this.shadowRoot.querySelector(
-              '.result-item__genre'
-            ).textContent = newValue);
-        }
-    }  
+		this.shadowRoot.appendChild(template);
+		match(params, this);
+	}
+
+	static get observedAttributes() {
+		return params;
+	}
+
+	attributeChangedCallback(param, oldValue, newValue) {
+		switch (param) {
+			case 'title':
+				return (this.shadowRoot.querySelector(
+					'.result-item__title'
+				).textContent = newValue);
+
+			case 'poster':
+			case 'poster':
+				return (this.shadowRoot.querySelector(
+					'.result-item__poster'
+				).src =
+					newValue == 'N/A'
+						? (this.shadowRoot.querySelector(
+								'.result-item__poster'
+						  ).style.display = 'none')
+						: newValue);
+
+			case 'link':
+				return (this.shadowRoot.querySelector(
+					'.result-item__link'
+				).href = newValue);
+
+			case 'year':
+				return (this.shadowRoot.querySelector(
+					'.result-item__year'
+				).textContent = newValue);
+
+			case 'note':
+				return (this.shadowRoot.querySelector(
+					'.result-item__note'
+				).textContent = newValue);
+
+			case 'genre':
+				return (this.shadowRoot.querySelector(
+					'.result-item__genre'
+				).textContent = newValue);
+		}
+	}
 }
-    
+
 customElements.define('movie-card', MovieCard);

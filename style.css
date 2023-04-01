@@ -58,7 +58,7 @@ main {
     padding-left: 14px;
     color: #FFF;
     font-size: 24px;
-    width: 470px;
+    width: 460px;
     background-color: inherit;
     border: none;
     margin-top: 2px;
@@ -261,3 +261,10 @@ main {
 
 .scroll .search-results {
   display: grid; }
+
+.spinner {
+  width: 500px;
+  height: 500px;
+  margin-left: 75%;
+  background-image: url("https://media.tenor.com/6gHLhmwO87sAAAAi/gg.gif"); }
+  

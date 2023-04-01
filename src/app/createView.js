@@ -75,7 +75,9 @@ export const createView = () => {
 		const listener = (event) => {
 			event.preventDefault();
 			setClassToMain('search_live');
-			const searchTerm = searchInput.value;
+			const searchTerm = searchInput.value
+				? searchInput.value
+				: event.submitter.innerText;
 			_listener(searchTerm);
 			searchInput.value = '';
 			searchTerms.unshift(searchTerm);

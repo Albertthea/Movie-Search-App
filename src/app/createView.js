@@ -47,8 +47,6 @@ export const createView = () => {
 		const list = document.createDocumentFragment();
 		searchTerms = new Set(searchTerms);
 		searchTerms.forEach((movie) => {
-			console.log(movie);
-			console.log(searchTerms);
 			const tag = document.createElement('button');
 			tag.classList.add('search-container__button');
 			tag.href = `/?search=${movie}`;
@@ -72,6 +70,7 @@ export const createView = () => {
 
 	const renderError = (error) => {
 		infoText.textContent = error;
+		clearNode(resultsContainer);
 	};
 
 	// Events
@@ -83,6 +82,7 @@ export const createView = () => {
 			const searchTerm = searchInput.value
 				? searchInput.value
 				: event.submitter.innerText;
+
 			if (searchTerm !== secondSearchTerm) {
 				_listener(searchTerm);
 				searchInput.value = '';
@@ -95,10 +95,6 @@ export const createView = () => {
 				const spinner = spinnerTemplate.content.cloneNode(true);
 
 				resultsContainer.appendChild(spinner);
-
-				if (infoText) {
-					clearNode(resultsContainer);
-				}
 			}
 			secondSearchTerm = searchTerm;
 		};
@@ -128,10 +124,10 @@ export const createView = () => {
 
 	return {
 		renderList,
-		renderCount,
 		renderError,
 		renderSearchList,
 		onSearchSubmit,
 		setStatusListeners,
+		renderCount,
 	};
 };

@@ -19,7 +19,7 @@ export const createModel = () => {
 	return createStore(initialState, (store) => ({
 		search: async (currentState, searchTerm) => {
 			store.setState({
-				count: 0,
+				// count: 0,
 				results: [],
 				error: false,
 			});

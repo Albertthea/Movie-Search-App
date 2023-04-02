@@ -3,6 +3,7 @@ import { mapMovie } from '../helpers/mapMovie.js';
 import { setClassToMain } from '../helpers/setClassToMain.js';
 
 export const createModel = () => {
+	let cash = new Map();
 	const cachedData = localStorage.getItem('state');
 	let initialState = {
 		count: 0,
@@ -31,21 +32,30 @@ export const createModel = () => {
 			try {
 				const timestamp = new Date().getTime();
 				const url = `http://www.omdbapi.com/?apikey=40952606&type=movie&s=${searchTerm}&timestamp=${timestamp}`;
+				if (!cash.has(searchTerm)) {
+					const data = await fetch(url).then((r) => r.json());
 
-				const data = await fetch(url).then((r) => r.json());
+					if (data.Response === 'True') {
+						const state = {
+							count: data.totalResults,
+							results: data.Search.map(mapMovie),
+							error: false,
+						};
 
-				if (data.Response === 'True') {
+						localStorage.setItem('state', JSON.stringify(state));
+						cash.set(searchTerm, data);
+						return state;
+					} else {
+						return { error: data.Error };
+					}
+				} else {
+					let data = cash.get(searchTerm);
 					const state = {
 						count: data.totalResults,
 						results: data.Search.map(mapMovie),
 						error: false,
 					};
-
-					localStorage.setItem('state', JSON.stringify(state));
-
 					return state;
-				} else {
-					return { error: data.Error };
 				}
 			} catch (error) {
 				return { error };

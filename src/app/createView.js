@@ -18,7 +18,7 @@ export const createView = () => {
 	const searchForm = document.querySelector('.search-container');
 	const searchInput = document.querySelector('.search-string__input');
 	const main = document.querySelector('main');
-	const searchTerms = [];
+	let searchTerms = [];
 
 	// Renderers
 	const renderList = (results) => {
@@ -45,7 +45,10 @@ export const createView = () => {
 
 	const renderSearchList = () => {
 		const list = document.createDocumentFragment();
+		searchTerms = new Set(searchTerms);
 		searchTerms.forEach((movie) => {
+			console.log(movie);
+			console.log(searchTerms);
 			const tag = document.createElement('button');
 			tag.classList.add('search-container__button');
 			tag.href = `/?search=${movie}`;
@@ -60,6 +63,7 @@ export const createView = () => {
 
 		clearNode(searchContainer);
 		searchContainer.appendChild(list);
+		searchTerms = Array.from(searchTerms);
 	};
 
 	const renderCount = (count) => {
@@ -71,6 +75,7 @@ export const createView = () => {
 	};
 
 	// Events
+	let secondSearchTerm;
 	const onSearchSubmit = (_listener) => {
 		const listener = (event) => {
 			event.preventDefault();
@@ -78,16 +83,24 @@ export const createView = () => {
 			const searchTerm = searchInput.value
 				? searchInput.value
 				: event.submitter.innerText;
-			_listener(searchTerm);
-			searchInput.value = '';
-			searchTerms.unshift(searchTerm);
-			renderSearchList();
+			if (searchTerm !== secondSearchTerm) {
+				_listener(searchTerm);
+				searchInput.value = '';
+				searchTerms.unshift(searchTerm);
+				renderSearchList();
 
-			clearNode(resultsContainer);
-			const spinnerTemplate = document.querySelector('#loaderTemplate');
-			const spinner = spinnerTemplate.content.cloneNode(true);
+				clearNode(resultsContainer);
+				const spinnerTemplate =
+					document.querySelector('#loaderTemplate');
+				const spinner = spinnerTemplate.content.cloneNode(true);
 
-			resultsContainer.appendChild(spinner);
+				resultsContainer.appendChild(spinner);
+
+				if (infoText) {
+					clearNode(resultsContainer);
+				}
+			}
+			secondSearchTerm = searchTerm;
 		};
 
 		searchForm.addEventListener('submit', listener);

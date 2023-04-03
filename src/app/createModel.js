@@ -20,9 +20,11 @@ export const createModel = () => {
 	return createStore(initialState, (store) => ({
 		search: async (currentState, searchTerm) => {
 			store.setState({
-				// count: 0,
 				results: [],
 				error: false,
+				// searches: [searchTerm].concat(
+				// 	currentState.searches.filter((term) => term !== searchTerm)
+				// ),
 			});
 
 			if (!searchTerm) {
@@ -44,6 +46,7 @@ export const createModel = () => {
 
 						localStorage.setItem('state', JSON.stringify(state));
 						cash.set(searchTerm, data);
+
 						return state;
 					} else {
 						return { error: data.Error };
@@ -60,6 +63,15 @@ export const createModel = () => {
 			} catch (error) {
 				return { error };
 			}
+		},
+		removeTag: (currentState, searchTerm) => {
+			console.log(searches);
+			return {
+				searches: currentState.state.filter(
+					(data) => data !== searchTerm
+				),
+			};
+			s;
 		},
 	}));
 };

@@ -16,6 +16,7 @@ export const createView = () => {
 
 	// Form
 	const searchForm = document.querySelector('.search-container');
+	const searchStrContent = document.querySelector('.search-string__content');
 	const searchInput = document.querySelector('.search-string__input');
 	const main = document.querySelector('main');
 	let searchTerms = [];
@@ -47,10 +48,11 @@ export const createView = () => {
 		const list = document.createDocumentFragment();
 		searchTerms = new Set(searchTerms);
 		searchTerms.forEach((movie) => {
-			const tag = document.createElement('button');
+			const tag = document.createElement('a');
 			tag.classList.add('search-container__button');
 			tag.href = `/?search=${movie}`;
 			tag.textContent = movie;
+			tag.dataset.movie = movie;
 
 			list.appendChild(tag);
 
@@ -65,7 +67,9 @@ export const createView = () => {
 	};
 
 	const renderCount = (count) => {
-		infoText.textContent = `Нашли ${count} ${dMovies(count)}`;
+		if (count > 0) {
+			infoText.textContent = `Нашли ${count} ${dMovies(count)}`;
+		}
 	};
 
 	const renderError = (error) => {
@@ -75,13 +79,14 @@ export const createView = () => {
 
 	// Events
 	let secondSearchTerm;
+
 	const onSearchSubmit = (_listener) => {
 		const listener = (event) => {
 			event.preventDefault();
 			setClassToMain('search_live');
-			const searchTerm = searchInput.value
-				? searchInput.value
-				: event.submitter.innerText;
+			const searchTerm = searchInput.value;
+			// ? searchInput.value
+			// : event.submitter.innerText;
 
 			if (searchTerm !== secondSearchTerm) {
 				_listener(searchTerm);
@@ -102,6 +107,45 @@ export const createView = () => {
 		searchForm.addEventListener('submit', listener);
 
 		return () => searchForm.removeEventListener('submit', listener);
+	};
+
+	const onButtonClick = (singleClickListner, doubleClickListener) => {
+		const listener = (event) => {
+			event.preventDefault();
+
+			if (
+				event.target.classList.contains('search-container__button') &&
+				!event.altKey
+			) {
+				if (event.detail === 1) {
+					singleClickListner(event.target.dataset.movie);
+				} else if (event.detail === 2) {
+					event.target.remove();
+					// console.log(dataset.movie)
+					// doubleClickListener(event.target.dataset.movie);
+					// console.log(event.target.id)
+				}
+			}
+		};
+
+		searchContainer.addEventListener('click', listener);
+		return () => searchContainer.removeEventListener('click', listener);
+	};
+
+	const offButtonClick = (_listener) => {
+		const listener = (event) => {
+			event.preventDefault();
+
+			if (
+				event.target.classList.contains('search-container__button') &&
+				event.altKey
+			) {
+				_listener(event.target.dataset.movie);
+			}
+		};
+
+		searchContainer.addEventListener('click', listener);
+		return () => searchContainer.removeEventListener('click', listener);
 	};
 
 	const setStatusListeners = () => {
@@ -129,5 +173,7 @@ export const createView = () => {
 		onSearchSubmit,
 		setStatusListeners,
 		renderCount,
+		onButtonClick,
+		offButtonClick,
 	};
 };

@@ -7,13 +7,17 @@ const model = createModel();
 const view = createView();
 const viewModel = createViewModel(model);
 
-
+// Viewmodel -> View
+viewModel.bindCount(view.renderCount);
 viewModel.bindError(view.renderError);
 viewModel.bindResults(view.renderList);
 viewModel.bindSearches(view.renderSearchList);
-viewModel.bindCount(view.renderCount);
 
+
+// View -> Viewmodel
 view.onSearchSubmit(viewModel.handleSearchSubmit);
+view.onButtonClick(viewModel.handleTagClick, viewModel.handleTagRemove);
+view.offButtonClick(viewModel.handleTagRemove);
 
 viewModel.init();
 

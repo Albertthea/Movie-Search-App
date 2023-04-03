@@ -47,6 +47,12 @@ export const createView = () => {
 	const renderSearchList = () => {
 		const list = document.createDocumentFragment();
 		searchTerms = new Set(searchTerms);
+
+		if (searchTerms.length > 10) {
+			searchTerms.pop();
+		}
+
+		searchTerms = Array.from(searchTerms);
 		searchTerms.forEach((movie) => {
 			const tag = document.createElement('a');
 			tag.classList.add('search-container__button');
@@ -56,14 +62,12 @@ export const createView = () => {
 
 			list.appendChild(tag);
 
-			if (searchTerms.length > 10) {
-				searchTerms.pop();
-			}
+			
 		});
 
 		clearNode(searchContainer);
 		searchContainer.appendChild(list);
-		searchTerms = Array.from(searchTerms);
+		
 	};
 
 	const renderCount = (count) => {
@@ -86,8 +90,8 @@ export const createView = () => {
 			setClassToMain('search_live');
 			const searchTerm = searchInput.value;
 			// ? searchInput.value
-			// : event.submitter.innerText;
-
+			// : document.querySelector('.search-container__button').innerText;
+			
 			if (searchTerm !== secondSearchTerm) {
 				_listener(searchTerm);
 				searchInput.value = '';
@@ -118,12 +122,19 @@ export const createView = () => {
 				!event.altKey
 			) {
 				if (event.detail === 1) {
+					const searchTerm = event.value;
+					renderSearchList();
+					
 					singleClickListner(event.target.dataset.movie);
+					console.log(searchTerm);
+
 				} else if (event.detail === 2) {
 					event.target.remove();
-					// console.log(dataset.movie)
-					// doubleClickListener(event.target.dataset.movie);
-					// console.log(event.target.id)
+					deletedupl(searchTerms, event.target.innerText);
+					
+					if (searchTerms.length == 0) {
+						clearNode(searchContainer);
+					}
 				}
 			}
 		};
@@ -147,6 +158,18 @@ export const createView = () => {
 		searchContainer.addEventListener('click', listener);
 		return () => searchContainer.removeEventListener('click', listener);
 	};
+
+	const deletedupl = (searchTerms, el) => {
+		let idx = 0;
+		for (let i = 0; i < searchTerms.length; i++) {
+			if (searchTerms[i] == el) {
+				idx = i;
+			}
+		}
+
+		searchTerms.splice(idx, 1);
+		return searchTerms;
+	}
 
 	const setStatusListeners = () => {
 		searchInput.addEventListener('click', () => {

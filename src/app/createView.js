@@ -88,24 +88,25 @@ export const createView = () => {
 		const listener = (event) => {
 			event.preventDefault();
 			setClassToMain('search_live');
-			const searchTerm = searchInput.value;
+			const searchTerm = searchInput.value.trim();
 			// ? searchInput.value
 			// : document.querySelector('.search-container__button').innerText;
-			
-			if (searchTerm !== secondSearchTerm) {
-				_listener(searchTerm);
-				searchInput.value = '';
-				searchTerms.unshift(searchTerm);
-				renderSearchList();
-
-				clearNode(resultsContainer);
-				const spinnerTemplate =
-					document.querySelector('#loaderTemplate');
-				const spinner = spinnerTemplate.content.cloneNode(true);
-
-				resultsContainer.appendChild(spinner);
+			if (searchTerm) {
+				if (searchTerm !== secondSearchTerm) {
+					_listener(searchTerm);
+					searchInput.value = '';
+					searchTerms.unshift(searchTerm);
+					renderSearchList();
+	
+					clearNode(resultsContainer);
+					const spinnerTemplate =
+						document.querySelector('#loaderTemplate');
+					const spinner = spinnerTemplate.content.cloneNode(true);
+	
+					resultsContainer.appendChild(spinner);
+				}
+				secondSearchTerm = searchTerm;
 			}
-			secondSearchTerm = searchTerm;
 		};
 
 		searchForm.addEventListener('submit', listener);

@@ -111,7 +111,7 @@ export const createView = () => {
 		return () => searchForm.removeEventListener('submit', listener);
 	};
 
-	const onButtonClick = (singleClickListner, doubleClickListener) => {
+	const onButtonClick = (_listener) => {
 		const listener = (event) => {
 			event.preventDefault();
 
@@ -121,6 +121,8 @@ export const createView = () => {
 			) {
 				if (event.detail === 1) {
 					const searchTerm = event.target.innerText;
+
+					_listener(searchTerm);
 					searchTerms.unshift(searchTerm);
 					renderSearchList();
 				} else if (event.detail === 2) {

@@ -37,8 +37,7 @@ export const createViewModel = (model) => {
 		bindResults: (listener) => (resultsListener = listener),
 		bindSearches: (listener) => (searchesListener = listener),
 		handleSearchSubmit: (searchTerm) => model.search(searchTerm),
-		handleTagClick: (searchTerm) => model.search(searchTerm),
-		handleTagRemove: (searchTerm) => model.removeTag(searchTerm),
+
 		init: () => {
 			update(model.getState());
 			model.subscribe(update);

@@ -13,11 +13,9 @@ viewModel.bindError(view.renderError);
 viewModel.bindResults(view.renderList);
 viewModel.bindSearches(view.renderSearchList);
 
-
 // View -> Viewmodel
 view.onSearchSubmit(viewModel.handleSearchSubmit);
-view.onButtonClick(viewModel.handleTagClick, viewModel.handleTagRemove);
-view.offButtonClick(viewModel.handleTagRemove);
+view.onButtonClick(viewModel.handleSearchSubmit);
 
 viewModel.init();
 

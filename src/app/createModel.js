@@ -22,9 +22,6 @@ export const createModel = () => {
 			store.setState({
 				results: [],
 				error: false,
-				// searches: [searchTerm].concat(
-				// 	currentState.searches.filter((term) => term !== searchTerm)
-				// ),
 			});
 
 			if (!searchTerm) {
@@ -63,15 +60,6 @@ export const createModel = () => {
 			} catch (error) {
 				return { error };
 			}
-		},
-		removeTag: (currentState, searchTerm) => {
-			console.log(searches);
-			return {
-				searches: currentState.state.filter(
-					(data) => data !== searchTerm
-				),
-			};
-			s;
 		},
 	}));
 };

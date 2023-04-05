@@ -53,6 +53,7 @@ export const createView = () => {
 		}
 
 		searchTerms = Array.from(searchTerms);
+
 		searchTerms.forEach((movie) => {
 			const tag = document.createElement('a');
 			tag.classList.add('search-container__button');
@@ -61,13 +62,10 @@ export const createView = () => {
 			tag.dataset.movie = movie;
 
 			list.appendChild(tag);
-
-			
 		});
 
 		clearNode(searchContainer);
 		searchContainer.appendChild(list);
-		
 	};
 
 	const renderCount = (count) => {
@@ -89,20 +87,19 @@ export const createView = () => {
 			event.preventDefault();
 			setClassToMain('search_live');
 			const searchTerm = searchInput.value.trim();
-			// ? searchInput.value
-			// : document.querySelector('.search-container__button').innerText;
+
 			if (searchTerm) {
 				if (searchTerm !== secondSearchTerm) {
 					_listener(searchTerm);
 					searchInput.value = '';
 					searchTerms.unshift(searchTerm);
 					renderSearchList();
-	
+
 					clearNode(resultsContainer);
 					const spinnerTemplate =
 						document.querySelector('#loaderTemplate');
 					const spinner = spinnerTemplate.content.cloneNode(true);
-	
+
 					resultsContainer.appendChild(spinner);
 				}
 				secondSearchTerm = searchTerm;
@@ -123,36 +120,17 @@ export const createView = () => {
 				!event.altKey
 			) {
 				if (event.detail === 1) {
-					const searchTerm = event.value;
+					const searchTerm = event.target.innerText;
+					searchTerms.unshift(searchTerm);
 					renderSearchList();
-					
-					singleClickListner(event.target.dataset.movie);
-					console.log(searchTerm);
-
 				} else if (event.detail === 2) {
 					event.target.remove();
 					deletedupl(searchTerms, event.target.innerText);
-					
+
 					if (searchTerms.length == 0) {
 						clearNode(searchContainer);
 					}
 				}
-			}
-		};
-
-		searchContainer.addEventListener('click', listener);
-		return () => searchContainer.removeEventListener('click', listener);
-	};
-
-	const offButtonClick = (_listener) => {
-		const listener = (event) => {
-			event.preventDefault();
-
-			if (
-				event.target.classList.contains('search-container__button') &&
-				event.altKey
-			) {
-				_listener(event.target.dataset.movie);
 			}
 		};
 
@@ -170,7 +148,7 @@ export const createView = () => {
 
 		searchTerms.splice(idx, 1);
 		return searchTerms;
-	}
+	};
 
 	const setStatusListeners = () => {
 		searchInput.addEventListener('click', () => {
@@ -198,6 +176,5 @@ export const createView = () => {
 		setStatusListeners,
 		renderCount,
 		onButtonClick,
-		offButtonClick,
 	};
 };

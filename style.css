@@ -31,6 +31,7 @@ main {
   flex-direction: column; }
   .search-container__history {
     margin: 24px auto 0;
+    width: calc(100vw - 160px);
     display: none;
     max-width: 1280px; }
   .search-container__button {

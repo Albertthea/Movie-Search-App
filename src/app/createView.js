@@ -111,7 +111,9 @@ export const createView = () => {
 		return () => searchForm.removeEventListener('submit', listener);
 	};
 
-	const onButtonClick = (_listener) => {
+	
+
+	const onButtonClick = (singleClickListner, doubleClickListener) => {
 		const listener = (event) => {
 			event.preventDefault();
 
@@ -120,18 +122,9 @@ export const createView = () => {
 				!event.altKey
 			) {
 				if (event.detail === 1) {
-					const searchTerm = event.target.innerText;
-
-					_listener(searchTerm);
-					searchTerms.unshift(searchTerm);
-					renderSearchList();
+					singleClickListner(event.target.dataset.movie);
 				} else if (event.detail === 2) {
 					event.target.remove();
-					deletedupl(searchTerms, event.target.innerText);
-
-					if (searchTerms.length == 0) {
-						clearNode(searchContainer);
-					}
 				}
 			}
 		};
